@@ -46,6 +46,13 @@ Nesse projeto foi utilizado a tecnologia net.core 2.2 com razor para o BackEnd e
 
 ## Branches
 
+### Branch : 01-Dev-ProjetoInicial
+#### Foram realizadas as seguintes atividades:
+
+- [x] Estruturação e organização do projeto
+- [x] Gerenciar bibliotecas externas 
+- [x] Criação de tagHelper
+- [x] Utilização do Bundle e Minificação de arquivos
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
