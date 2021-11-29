@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.Razor;
 
 namespace DevMarcos.UI.Site
 {
@@ -16,6 +17,15 @@ namespace DevMarcos.UI.Site
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            // Configura o novo repositório de Area apontandop para pasta Modulos 
+            services.Configure<RazorViewEngineOptions>(options =>
+            {
+                options.AreaViewLocationFormats.Clear();
+                options.AreaViewLocationFormats.Add("/Modulos/{2}/Views/{1}/{0}.cshtml");
+                options.AreaViewLocationFormats.Add("/Modulos/{2}/Views/Shared/{0}.cshtml");
+                options.AreaViewLocationFormats.Add("/Views/Shared/{0}.cshtml");
+            });
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
@@ -30,9 +40,27 @@ namespace DevMarcos.UI.Site
 
             app.UseMvc( routes =>
             {
+               
+             //   routes.MapRoute(
+             //        name: "areas",
+             //        template: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+             //      );
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
+
+                routes.MapAreaRoute(
+                 name: "AreaProdutos",
+                 areaName: "Produtos",
+                 template: "Produtos/{controller=Cadastro}/{action=Index}/{id?}"
+                 );
+                routes.MapAreaRoute(
+                    name: "AreaVendas",
+                    areaName: "Vendas",
+                    template: "Vendas/{controller=Pedidos}/{action=Index}/{id?}"
+                    );
+
+
             });
         }
     }

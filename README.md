@@ -55,6 +55,14 @@ Nesse projeto foi utilizado a tecnologia net.core 2.2 com razor para o BackEnd e
 - [x] Utilização do Bundle e Minificação de arquivos
 
 
+### Branch : 02-Dev-Utilizacao_Areas
+#### Foram realizadas as seguintes atividades:
+
+- [x] Criação do repositório de Areas
+- [x] Configuração de localização da pasta que armaneza as areas arquivo startup.cs (mudança do nome padrão )
+- [x] Configuração das rotas por Area
+
+
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- CONTACT -->
