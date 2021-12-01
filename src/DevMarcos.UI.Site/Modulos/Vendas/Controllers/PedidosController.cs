@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DevMarcos.UI.Site.Modulos.Vendas.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +11,17 @@ namespace DevMarcos.UI.Site.Modulos.Vendas.Controllers
     [Route("vendas")]
     public class PedidosController : Controller
     {
-       
+
+        private readonly IPedidoRepository _pedidoRepository;
+
+        public PedidosController(IPedidoRepository pedidoRepository)
+        {
+            _pedidoRepository = pedidoRepository;
+        }
+
         public IActionResult Index()
         {
+            var pedido = _pedidoRepository.ObterPedido();
             return View();
         }
         

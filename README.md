@@ -63,6 +63,14 @@ Nesse projeto foi utilizado a tecnologia net.core 2.2 com razor para o BackEnd e
 - [x] Configuração das rotas por Area
 
 
+### Branch : 02-Dev-Injecao_Dependencia
+#### Foram realizadas as seguintes atividades:
+
+- [x] Criação da Classe Repository de Pedido e Sua Interface
+- [x] Coonfiguração na startup para utilizar a classe PedidoRepository com injeção de dependência.
+- [x] Utilizaçao de chamada da classe Pedido através da Injeção de dependência.
+- [x] Arquivo de teste do ciclo de vida de uma chamada agtravés de injeção de dependência.
+
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- CONTACT -->
