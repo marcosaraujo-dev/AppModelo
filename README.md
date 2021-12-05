@@ -74,10 +74,19 @@ Nesse projeto foi utilizado a tecnologia net.core 2.2 com razor para o BackEnd e
 ### Branch : 04-Dev-Entity_Framework
 #### Foram realizadas as seguintes atividades:
 
-- [x] Instalaçaõ Entity Framework
+- [x] Instalação Entity Framework
 - [x] Configuração  classe MeuDbContext
 - [x] Criação exemplo de chamada para cadastro de produto
 - [x] Utilização do Migrations para criação da base e tabelas.
+
+### Branch : 05-Dev-Segurança_Identity
+#### Foram realizadas as seguintes atividades:
+
+- [x] Instalação e configuração do identity
+- [x] Criação de mecanismo de autenticação (Login)
+- [x] Criação de mecanismo de autorização (Acesso a determinada funcionalidade do sistema)
+- [x] Criação de claims e roles para gerenciar o acesso as acções na aplicação
+- [x] Criaçaõ de classe para customizar a autenticação da aplicação
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 

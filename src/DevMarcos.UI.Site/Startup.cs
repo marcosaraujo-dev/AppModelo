@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Mvc.Razor;
 using DevMarcos.UI.Site.Modulos.Vendas.Interfaces;
 using DevMarcos.UI.Site.Modulos.Vendas.Data;
@@ -14,6 +15,10 @@ using DevMarcos.UI.Site.Servicos;
 using DevMarcos.UI.Site.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using DevMarcos.UI.Site.Modulos.Identity.Data;
+using Microsoft.AspNetCore.Identity;
+using DevMarcos.UI.Site.Extensions;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DevMarcos.UI.Site
 {
@@ -44,6 +49,26 @@ namespace DevMarcos.UI.Site
                 options.UseSqlite(Configuration.GetConnectionString("MeuDbContext"))
                 );
 
+            services.AddDbContext<AspNetCoreIdentityContext>(options =>
+                  options.UseSqlite(
+                      Configuration.GetConnectionString("AppIdentityContext")));
+
+            services.AddDefaultIdentity<IdentityUser>()
+                .AddRoles<IdentityRole>()
+                .AddDefaultUI(UIFramework.Bootstrap4)
+                .AddEntityFrameworkStores<AspNetCoreIdentityContext>();
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("PodeExcluir", policy => policy.RequireClaim("PodeExcluir"));
+
+                options.AddPolicy("PodeLer", policy => policy.Requirements.Add(new PermissaoNecessaria("PodeLer")));
+                options.AddPolicy("PodeEscrever", policy => policy.Requirements.Add(new PermissaoNecessaria("PodeEscrever")));
+
+            });  
+
+            
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddTransient<IPedidoRepository, PedidoRepository>();
@@ -52,6 +77,8 @@ namespace DevMarcos.UI.Site
             services.AddScoped<IOperacaoScoped, Operacao>();
             services.AddSingleton<IOperacaoSingleton, Operacao>();
             services.AddSingleton<IOperacaoSingletonInstance>(new Operacao(Guid.Empty));
+
+            services.AddSingleton<IAuthorizationHandler, PermissaoNecessariaHandler>(); // Registra classe que controla permissão
 
             services.AddTransient<OperacaoService>();
         }
@@ -64,6 +91,9 @@ namespace DevMarcos.UI.Site
                 app.UseDeveloperExceptionPage();
             }
             app.UseStaticFiles();
+            app.UseCookiePolicy();
+
+            app.UseAuthentication();
 
             app.UseMvc( routes =>
             {
